@@ -1,0 +1,18 @@
+saudesimples/.git
+saudesimples/.gitignore
+
+# Ignore all logfiles and tempfiles.
+saudesimples//log/*
+saudesimples//tmp/*
+saudesimples/!/log/.keep
+saudesimples/!/tmp/.keep
+
+#
+saudesimples//storage/*
+saudesimples/!/storage/.keep
+
+saudesimples/tmp/*
+saudesimples!/tmp/.keep
+
+# Ignore Byebug command history file.
+saudesimples/.byebug_history

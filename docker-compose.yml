@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  app:
+    build: .
+    volumes:
+      - ./saudesimples:/saudesimples
+      - bundle_path:/bundle
+    environment:
+      - RAILS_ENV=${RAILS_ENV}
+      - BUNDLE_PATH=/bundle/vendor
+    depends_on:
+      - db
+      - redis
+      - elasticsearch
+
+  db:
+    image: postgres:9.6.10
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    ports:
+      - '5432:5432'
+
+  redis:
+    image: redis:6.0.5
+    volumes:
+      - 'redis:/data'
+    command: redis-server
+    ports:
+      - '6379:6379'
+
+  elasticsearch:
+    image: elasticsearch:5.6.16
+    ports:
+    - '9200:9200'
+
+volumes:
+  db_data:
+  redis:
+  bundle_path:
