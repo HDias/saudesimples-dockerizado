@@ -30,18 +30,22 @@
 
  - Ainda tem o gargalo de necessitar restaurar o dump do banco atual (Migrations with trouble)
 
+ - Abaixo o exemplo de importação de uma dump `.sql.gz`. Existem outras formas.
+
  - Com o dump do banco em mãos
- - Copie o dump para o container do postgres Exemplo: `docker cp saudesimples_development.sql.gz <ID_CONTAINER:/tmp/`
+ - Copie o dump para o container do postgres Exemplo: `docker cp saudesimples_development.sql.gz <ID_CONTAINER>:/tmp/`
  - Para obter o id do container rode docker ps
  - Depois de copiado
 
- - Run `docker compose run db bash`. Dentro do container siga os passos a seguir
+ - Run ` docker exec -it <ID_CONTAINER> bash`. Dentro do container siga os passos a seguir
  - Crie uma ROLE no postgres:
  - Acesse o psql `su - postgres`, `psql`: `CREATE ROLE om30 WITH SUPERUSER;`
  - Crie DATABASE:
  - Acesse o psql `su - postgres`, `psql`: `CREATE DATABASE saudesimples_development;`
  - Saia do PSQL
  - Import o banco: `gunzip -c /tmp/saudesimples_development.sql.gz | psql -U postgres saudesimples_development`
+
+ - Para dump files: `zcat dump.gz | psql`
 
  - Rode as última migrations: `bundle exec rake db:migrate`
 
