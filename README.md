@@ -49,7 +49,6 @@
 
  - Rode os containers:
  - Run: `docker compose up`
- ![Sucesso no docker build](docs/images/jquery-ask.png)
 
  ## Tela de acesso
 
