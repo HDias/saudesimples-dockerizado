@@ -3,16 +3,16 @@ version: '3'
 services:
   app:
     build: .
+    ports:
+      - "4000:4000"
     volumes:
       - ./saudesimples:/saudesimples
       - bundle_path:/bundle
     environment:
-      - RAILS_ENV=${RAILS_ENV}
+      - RAILS_ENV=development
       - BUNDLE_PATH=/bundle/vendor
     depends_on:
       - db
-      - redis
-      - elasticsearch
 
   db:
     image: postgres:9.6.10
