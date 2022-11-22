@@ -57,6 +57,9 @@
 
  - Rode os containers:
  - Run: `docker compose up`
+ - ### Elastichsearch
+
+ - Para indexar as buscar no elasticsearch após a criação do banco Acesse `rails c` e rode `rake searchkick:reindex:all`
 
  ## Tela de acesso
 
