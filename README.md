@@ -51,6 +51,30 @@
 
  - É necessário criar a tabela de auditoria de forma separada, mesmo com o dump. Siga os procedimentos previstos [aqui](https://github.com/OM30/saudesimples/wiki/Criar-tabela-Audits)
 
+ ```ruby
+ ActiveRecord::Migration.create_table :audits, :force => true do |t|
+  t.column :auditable_id, :bigint
+  t.column :auditable_type, :string
+  t.column :associated_id, :bigint
+  t.column :associated_type, :string
+  t.column :user_id, :bigint
+  t.column :user_type, :string
+  t.column :username, :string
+  t.column :action, :string
+  t.column :audited_changes, :text
+  t.column :version, :bigint, :default => 0
+  t.column :comment, :string
+  t.column :remote_address, :string
+  t.column :created_at, :datetime
+end
+ActiveRecord::Migration.add_index :audits, [:auditable_id, :auditable_type], :name => 'auditable_index'
+ActiveRecord::Migration.add_index :audits, [:associated_id, :associated_type], :name => 'associated_index'
+ActiveRecord::Migration.add_index :audits, [:user_id, :user_type], :name => 'user_index'
+ActiveRecord::Migration.add_index :audits, :created_at
+ActiveRecord::Migration.add_column :audits, :request_uuid, :string
+ActiveRecord::Migration.add_index :audits, :request_uuid
+ ```
+
  - Rode as última migrations: `bundle exec rake db:migrate`
 
 ## RUN APP
