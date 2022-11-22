@@ -13,6 +13,7 @@ services:
       - BUNDLE_PATH=/bundle/vendor
     depends_on:
       - db
+      - elasticsearch
 
   db:
     image: postgres:9.6.10
