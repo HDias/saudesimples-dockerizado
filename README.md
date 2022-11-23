@@ -45,6 +45,31 @@
  - Saia do PSQL
  - Import o banco: `gunzip -c /tmp/saudesimples_development.sql.gz | psql -U postgres saudesimples_development`
 
+ - Crie o arquivo `saudesimples/config/database.yml` com o conteúdo a seguir:
+
+```ruby
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  host: <%= ENV.fetch("DB_DATABASE") { 'db' } %>
+  username: <%= ENV.fetch("DB_USERNAME") { 'postgres' } %>
+  password: <%= ENV.fetch("DB_PASSWORD") { 'postgres' } %>
+  # https://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 30 } %>
+
+development:
+  <<: *defaults
+  database: saudesimples_development
+
+test:
+  <<: *defaults
+  database: saudesimples_test
+
+production:
+  <<: *defaults
+  database: saudesimples_production
+```
+
  - ### Audits
 
  - É uma boa pratica gerar o dump sem a tabela de auditorias, pois fica bem menor e mais rápido o processamento.
@@ -83,7 +108,9 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
  - Run: `docker compose up`
  - ### Elastichsearch
 
- - Para indexar as buscar no elasticsearch após a criação do banco Acesse `rails c` e rode `rake searchkick:reindex:all`
+ - `cp saudesimples/config/initializers/elasticsearch.rb.example saudesimples/config/initializers/elasticsearch.rb`
+ - Altere `ENV['ELASTICSEARCH_URL'] = 'http://localhost:9200'` para: `ENV['ELASTICSEARCH_URL'] = 'http://elasticsearch:9200'`
+ - Para indexar as buscar no elasticsearch após a criação do banco rode a task `rake searchkick:reindex:all`
 
  ## Tela de acesso
 
