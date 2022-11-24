@@ -1,18 +1,36 @@
 FROM ruby:2.2.10
 
 RUN apt-get update -qq
-RUN apt-get install -y \
+RUN apt-get upgrade -y --force-yes
+RUN apt-get install -y --force-yes \
+  apt-transport-https \
   build-essential \
   postgresql-client \
   libpq-dev \
   cmake \
-  zlib1g-dev \
-  libcppunit-dev \
-  git \
+  curl \
+  git-core  \
   make \
   gcc \
-  openjdk-7-jdk  \
-  && rm -rf /var/lib/apt/lists/*
+  openjdk-7-jdk \
+  xvfb \
+  openssl
+
+# wkhtmltopdf
+RUN curl -O -J -L https://github.com/wkhtmltopdf/wkhtmltopdf/releases/download/0.12.4/wkhtmltox-0.12.4_linux-generic-amd64.tar.xz
+RUN tar xvf wkhtmltox*.tar.xz
+RUN mv wkhtmltox/bin/wkhtmlto* /usr/bin
+RUN apt-get install -y --force-yes \
+  xfonts-75dpi \
+  libssl-dev \
+  libxrender-dev \
+  libx11-dev \
+  libxext-dev \
+  libfontconfig1-dev \
+  libfreetype6-dev \
+  fontconfig
+RUN ln -s /usr/bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf;
+RUN chmod +x /usr/local/bin/wkhtmltopdf;
 
 ENV APP_PATH /usr/src/app
 ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
@@ -26,6 +44,7 @@ RUN npm install bower@1.8.8 -g
 RUN gem uninstall -i /usr/local/lib/ruby/gems/2.2.0 bundler
 RUN gem install bundler -v 1.17.3
 RUN gem install rake -v 12.3.3
+RUN gem install foreman
 
 # add credentials on build
 ARG SSH_PRIVATE_KEY
@@ -48,4 +67,4 @@ RUN bundle install
 
 EXPOSE 4000
 
-CMD ["bundle", "exec", "rails", "s", "-p", "4000"]
+CMD ["foreman", "start"]
