@@ -38,8 +38,11 @@ services:
     image: elasticsearch:5.6.16
     ports:
     - '9200:9200'
+    volumes:
+      - elasticsearch-data:/usr/share/elasticsearch/data
 
 volumes:
   db_data:
   redis:
   bundle_path:
+  elasticsearch-data:
