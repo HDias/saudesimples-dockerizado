@@ -118,3 +118,12 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
  - Acesse `rails c` e altere a senha de produtos `Usuario.where(login: 'produtos').first.update_attribute(:password, 'admin')` ou de outro `Usuário` para ter acesso ao app
 
  ![Sucesso ao acessar](docs/images/login-success.png)
+
+
+## Configuração de ambiente de teste (RSpec)
+
+Para que os testes rodem, é necessário ter um banco de testes previamente populado, para isso rode os seguintes
+comandos:
+
+- Run ` docker exec -it <ID_CONTAINER> bash`. Dentro do container siga os passos a seguir
+- Run `rake db:create db:migrate db:seed RAILS_ENV=test`
