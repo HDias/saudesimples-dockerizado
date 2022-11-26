@@ -127,3 +127,4 @@ comandos:
 
 - Run ` docker exec -it <ID_CONTAINER> bash`. Dentro do container siga os passos a seguir
 - Run `rake db:create db:migrate db:seed RAILS_ENV=test`
+- Run rspec `bin/rspec`
