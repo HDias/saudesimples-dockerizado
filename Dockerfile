@@ -44,7 +44,10 @@ RUN npm install bower@1.8.8 -g
 RUN gem uninstall -i /usr/local/lib/ruby/gems/2.2.0 bundler
 RUN gem install bundler -v 1.17.3
 RUN gem install rake -v 12.3.3
-RUN gem install foreman
+
+# Debugger
+RUN gem install ruby-debug-ide
+RUN gem install debase
 
 # add credentials on build
 ARG SSH_PRIVATE_KEY
@@ -67,4 +70,4 @@ RUN bundle install
 
 EXPOSE 4000
 
-CMD ["foreman", "start"]
+CMD ["rails", "server", "-p", "4000"]

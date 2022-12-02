@@ -128,3 +128,38 @@ comandos:
 - Run ` docker exec -it <ID_CONTAINER> bash`. Dentro do container siga os passos a seguir
 - Run `rake db:create db:migrate db:seed RAILS_ENV=test`
 - Run rspec `bin/rspec`
+
+
+## TODO
+
+- Add Jasper way
+
+```yml
+  jasperserver:
+    image: docker.io/bitnami/jasperreports:8.1.0
+    restart: always
+    ports:
+      - '8080:8080'
+      - '8443:8443'
+    volumes:
+      - 'jasperserver_data:/bitnami/jasperreports'
+    depends_on:
+      - db
+    environment:
+      - JASPERREPORTS_DATABASE_TYPE=postgresql
+      - JASPERREPORTS_DATABASE_HOST=db
+      - JASPERREPORTS_DATABASE_PORT_NUMBER=5432
+      - JASPERREPORTS_DATABASE_USER=postgres
+      - JASPERREPORTS_DATABASE_PASSWORD=postgres
+      - JASPERREPORTS_DATABASE_NAME=saudesimples_development
+      - JASPERREPORTS_USERNAME=jasperadmin
+      - JASPERREPORTS_PASSWORD=jasperadmin
+      - POSTGRESQL_CLIENT_DATABASE_HOST=db
+      - POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER=5432
+      - POSTGRESQL_CLIENT_DATABASE_ROOT_USER=postgres
+      - POSTGRESQL_CLIENT_DATABASE_ROOT_PASSWORD=postgres
+
+volumes:
+  ...
+  jasperserver_data:
+```
