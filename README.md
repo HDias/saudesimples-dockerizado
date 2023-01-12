@@ -23,7 +23,7 @@
  - Run `docker compose run app bash`. Dentro do container siga os passos a seguir
  - Run `echo '{ "allow_root": true }' > /root/.bowerrc`
  - Run `rake bower:install`
- - Se aparecer as questões sobre Jquery escolha a opção `1`: `1.8.0`
+ - Se aparecer as questões sobre Jquery escolha a opção `2`: `1.11.1`
 
  ![Jquery-Answer](docs/images/jquery-ask.png)
 
