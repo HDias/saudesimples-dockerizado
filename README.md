@@ -127,6 +127,12 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
  - Subistitua: `config.redis = { namespace: 'saudesimples254', url: 'redis://127.0.0.1:6379/saudesimples254' }` por:
  `config.redis = { namespace: 'saudesimples254', url: 'redis://redis:6379/saudesimples254' }`
 
+ Acesse o container `app`: `docker compose run app bash` e rode o seguinte comando:
+  - `bundle exec sidekiq`
+ Acesse: `http://localhost:4000/sidekiq/` e verá a seguinte tela:
+
+ ![Sucesso ao acessar sidekiq](docs/images/sidekiq.png)
+
 
 ## Configuração de ambiente de teste (RSpec)
 
