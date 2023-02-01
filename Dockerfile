@@ -48,6 +48,7 @@ RUN gem install rake -v 12.3.3
 # Debugger
 RUN gem install ruby-debug-ide
 RUN gem install debase
+RUN gem install byebug -v 10.0.2
 
 # add credentials on build
 ARG SSH_PRIVATE_KEY
