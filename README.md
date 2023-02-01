@@ -120,6 +120,13 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
 
  ![Sucesso ao acessar](docs/images/login-success.png)
 
+ ## Sidekiq
+
+ Em: `Sidekiq.configure_client` e `Sidekiq.configure_server`
+ - Configure o path para o redis em: `saudesimples/config/initializers/sidekiq.rb`
+ - Subistitua: `config.redis = { namespace: 'saudesimples254', url: 'redis://127.0.0.1:6379/saudesimples254' }` por:
+ `config.redis = { namespace: 'saudesimples254', url: 'redis://redis:6379/saudesimples254' }`
+
 
 ## Configuração de ambiente de teste (RSpec)
 
@@ -137,28 +144,18 @@ comandos:
 
 ```yml
   jasperserver:
-    image: docker.io/bitnami/jasperreports:8.1.0
+    image: ghcr.io/om30/jasperserver:7.1.0
     restart: always
     ports:
       - '8080:8080'
       - '8443:8443'
-    volumes:
-      - 'jasperserver_data:/bitnami/jasperreports'
-    depends_on:
-      - db
     environment:
-      - JASPERREPORTS_DATABASE_TYPE=postgresql
-      - JASPERREPORTS_DATABASE_HOST=db
-      - JASPERREPORTS_DATABASE_PORT_NUMBER=5432
-      - JASPERREPORTS_DATABASE_USER=postgres
-      - JASPERREPORTS_DATABASE_PASSWORD=postgres
-      - JASPERREPORTS_DATABASE_NAME=saudesimples_development
-      - JASPERREPORTS_USERNAME=jasperadmin
-      - JASPERREPORTS_PASSWORD=jasperadmin
-      - POSTGRESQL_CLIENT_DATABASE_HOST=db
-      - POSTGRESQL_CLIENT_DATABASE_PORT_NUMBER=5432
-      - POSTGRESQL_CLIENT_DATABASE_ROOT_USER=postgres
-      - POSTGRESQL_CLIENT_DATABASE_ROOT_PASSWORD=postgres
+      WEB_APP_NAME_CE: jasperserver
+      DB_TYPE: postgresql
+      DB_PORT: 5432
+      DB_HOST: db
+      DB_USER: postgres
+      DB_PASSWORD: postgres
 
 volumes:
   ...
