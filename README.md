@@ -134,6 +134,15 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
  ![Sucesso ao acessar sidekiq](docs/images/sidekiq.png)
 
 
+## PRY
+
+ Para utilizar o `pry` em outro terminal rode `docker attach <ID | NAME_APP>`
+
+ Ex.:
+  - `docker attach 0d1ef78b3dc7`
+  - `docker attach saudesimples-dockerizado-app-1`
+
+
 ## Configuração de ambiente de teste (RSpec)
 
 Para que os testes rodem, é necessário ter um banco de testes previamente populado, para isso rode os seguintes
