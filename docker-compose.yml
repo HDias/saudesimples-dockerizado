@@ -43,7 +43,7 @@ services:
 
   jasperserver:
     image: ghcr.io/om30/jasperserver:7.1.0
-    restart: always
+    # restart: always
     ports:
       - '8080:8080'
       - '8443:8443'
