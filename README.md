@@ -142,6 +142,7 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
   - `docker attach 0d1ef78b3dc7`
   - `docker attach saudesimples-dockerizado-app-1`
 
+ Também há outra opção que seria subir o container utilizando: `docker-compose run --service-ports app`
 
 ## Configuração de ambiente de teste (RSpec)
 
