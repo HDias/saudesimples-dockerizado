@@ -20,7 +20,7 @@
 
  ![Se tudo der certo no build](docs/images/docker-sucess.png)
 
- - Run `docker compose run app bash`. Dentro do container siga os passos a seguir
+ - Run `docker compose run app_v2 bash`. Dentro do container siga os passos a seguir
  - Run `echo '{ "allow_root": true }' > /root/.bowerrc`
  - Run `rake bower:install`
  - Se aparecer as questões sobre Jquery escolha a opção `2`: `1.11.1`
@@ -127,7 +127,7 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
  - Subistitua: `config.redis = { namespace: 'saudesimples254', url: 'redis://127.0.0.1:6379/saudesimples254' }` por:
  `config.redis = { namespace: 'saudesimples254', url: 'redis://redis:6379/saudesimples254' }`
 
- Acesse o container `app`: `docker compose run app bash` e rode o seguinte comando:
+ Acesse o container `app`: `docker compose run app_v2 bash` e rode o seguinte comando:
   - `bundle exec sidekiq`
  Acesse: `http://localhost:4000/sidekiq/` e verá a seguinte tela:
 
@@ -142,7 +142,7 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
   - `docker attach 0d1ef78b3dc7`
   - `docker attach saudesimples-dockerizado-app-1`
 
- Também há outra opção que seria subir o container utilizando: `docker-compose run --service-ports app`
+ Também há outra opção que seria subir o container utilizando: `docker compose run --service-ports app`
 
 ## Configuração de ambiente de teste (RSpec)
 
@@ -153,6 +153,22 @@ comandos:
 - Run `rake db:create db:migrate db:seed RAILS_ENV=test`
 - Run rspec `bin/rspec`
 
+## Compartilhando recurso com a V3
+
+Para integração com a api v3 é necessário criar uma `network` nomeada de `saude_simples` e depois subir os containers a seguir `elastichserarch_v2` e o `db_v2` junto a `app_v2`:
+- RUN `docker network create -d bridge saude_simples`
+- Run `docker compose app_v2 elasticsearch_v2`
+
+No `docker-compose.yml` a api da V3 deve ser adicionar em `app:` como segue
+
+```yml
+    networks:
+      - saude_simples
+    external_links:
+      - app_v2:app_v2
+      - elasticsearch_v2:elasticsearch_v2
+      - db_v2:db_v2
+```
 
 ## TODO
 
