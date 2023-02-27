@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  app:
+  app_v2:
     build: .
     ports:
       - "4000:4000"
@@ -15,9 +15,13 @@ services:
       - BUNDLE_PATH=/bundle/vendor
       - SIDEKIQ_REDIS_URL=redis://redis:6379/1
     depends_on:
-      - db
+      - db_v2
+    networks:
+      - saude_simples
+    external_links:
+      - app_v3:app_v3
 
-  db:
+  db_v2:
     image: postgres:9.6.10
     restart: always
     environment:
@@ -27,21 +31,27 @@ services:
       - $HOME/.postgres:/var/lib/postgresql/data
     ports:
       - '5432:5432'
+    networks:
+      - saude_simples
 
-  redis:
+  redis_v2:
     image: 'redis:7.0-rc2-alpine'
     command: redis-server
     volumes:
       - 'redis:/data'
+    networks:
+      - saude_simples
 
-  elasticsearch:
+  elasticsearch_v2:
     image: elasticsearch:5.6.16
     ports:
     - '9200:9200'
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
+    networks:
+      - saude_simples
 
-  jasperserver:
+  jasperserver_v2:
     image: ghcr.io/om30/jasperserver:7.1.0
     # restart: always
     ports:
@@ -51,7 +61,7 @@ services:
       WEB_APP_NAME_CE: jasperserver
       DB_TYPE: postgresql
       DB_PORT: 5432
-      DB_HOST: db
+      DB_HOST: db_v2
       DB_USER: postgres
       DB_PASSWORD: postgres
 
@@ -60,3 +70,7 @@ volumes:
   redis:
   bundle_path:
   elasticsearch-data:
+
+networks:
+  saude_simples:
+    external: true
