@@ -125,9 +125,9 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
  Em: `Sidekiq.configure_client` e `Sidekiq.configure_server`
  - Configure o path para o redis em: `saudesimples/config/initializers/sidekiq.rb`
  - Subistitua: `config.redis = { namespace: 'saudesimples254', url: 'redis://127.0.0.1:6379/saudesimples254' }` por:
- `config.redis = { namespace: 'saudesimples254', url: 'redis://redis:6379/saudesimples254' }`
+ `config.redis = { namespace: 'saudesimples254', url: 'redis://redis_v2:6379/saudesimples254' }`
 
- Acesse o container `app`: `docker compose run app_v2 bash` e rode o seguinte comando:
+ Acesse o container `app_v2`: `docker compose run app_v2 bash` e rode o seguinte comando:
   - `bundle exec sidekiq`
  Acesse: `http://localhost:4000/sidekiq/` e verá a seguinte tela:
 

@@ -46,6 +46,8 @@ services:
     image: elasticsearch:5.6.16
     ports:
     - '9200:9200'
+    depends_on:
+      - db_v2
     volumes:
       - elasticsearch-data:/usr/share/elasticsearch/data
     networks:
@@ -57,6 +59,8 @@ services:
     ports:
       - '8080:8080'
       - '8443:8443'
+    depends_on:
+      - db_v2
     environment:
       WEB_APP_NAME_CE: jasperserver
       DB_TYPE: postgresql
@@ -64,6 +68,8 @@ services:
       DB_HOST: db_v2
       DB_USER: postgres
       DB_PASSWORD: postgres
+    networks:
+      - saude_simples
 
 volumes:
   db_data:
