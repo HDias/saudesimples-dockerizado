@@ -110,7 +110,7 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
  - ### Elastichsearch
 
  - `cp saudesimples/config/initializers/elasticsearch.rb.example saudesimples/config/initializers/elasticsearch.rb`
- - Altere `ENV['ELASTICSEARCH_URL'] = 'http://localhost:9200'` para: `ENV['ELASTICSEARCH_URL'] = 'http://elasticsearch:9200'`
+ - Altere `ENV['ELASTICSEARCH_URL'] = 'http://localhost:9200'` para: `ENV['ELASTICSEARCH_URL'] = 'http://elasticsearch_v2:9200'`
  - Para indexar as buscar no elasticsearch após a criação do banco rode a task `rake searchkick:reindex:all`
 
  ## Tela de acesso
@@ -142,7 +142,7 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
   - `docker attach 0d1ef78b3dc7`
   - `docker attach saudesimples-dockerizado-app-1`
 
- Também há outra opção que seria subir o container utilizando: `docker compose run --service-ports app`
+ Também há outra opção que seria subir o container utilizando: `docker compose run --service-ports app_v2`
 
 ## Configuração de ambiente de teste (RSpec)
 
