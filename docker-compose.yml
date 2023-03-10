@@ -13,7 +13,8 @@ services:
     environment:
       - RAILS_ENV=development
       - BUNDLE_PATH=/bundle/vendor
-      - SIDEKIQ_REDIS_URL=redis://redis:6379/1
+      - SIDEKIQ_REDIS_URL=redis://redis_v2:6379/1
+      - TZ=America/Araguaina
     depends_on:
       - db_v2
     networks:
