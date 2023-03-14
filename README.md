@@ -6,8 +6,8 @@
 
 ## Files
 
-- Cone o projeto saudesimples
-- Na `root` run `https://github.com/OM30/saudesimples`
+- Clone o projeto saudesimples
+- Na `root` run `git clone https://github.com/OM30/saudesimples`
 
 - Copie e cole na raiz do projeto a chave pública e privada que tens acesso aos repositórios (NÂO COMMIT ELAS JAMAIS!!!)
 - Gere suas ecdsa `ssh-keygen -t ecdsa -b 521 -C "your_email@example.com"`. Adicionei ao sua conta github a `.pub`
