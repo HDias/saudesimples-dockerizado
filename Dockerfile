@@ -70,5 +70,6 @@ COPY saudesimples/Gemfile.lock /saudesimples/Gemfile.lock
 RUN bundle install
 
 EXPOSE 4000
+EXPOSE 8080
 
 CMD ["rails", "server", "-p", "4000"]
