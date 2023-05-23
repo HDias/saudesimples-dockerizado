@@ -173,6 +173,7 @@ No `docker-compose.yml` a api da V3 deve ser adicionar em `app:` como segue
 ## TODO
 
 - Add Jasper way
+- Comando para obter IP do jasperserver: docker inspect <ID_JASPER_DOCKER_SERVER> | grep "IPAddress"
 
 ```yml
   jasperserver:
