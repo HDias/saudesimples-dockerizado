@@ -1,7 +1,8 @@
 FROM ruby:2.2.10
 
+RUN echo "deb http://archive.debian.org/debian stretch main" > /etc/apt/sources.list
 RUN apt-get update -qq
-RUN apt-get upgrade -y --force-yes
+# RUN apt-get upgrade -y --force-yes
 RUN apt-get install -y --force-yes \
   apt-transport-https \
   build-essential \
@@ -12,7 +13,7 @@ RUN apt-get install -y --force-yes \
   git-core  \
   make \
   gcc \
-  openjdk-7-jdk \
+  openjdk-8-jdk \
   xvfb \
   openssl
 
@@ -33,7 +34,7 @@ RUN ln -s /usr/bin/wkhtmltopdf /usr/local/bin/wkhtmltopdf;
 RUN chmod +x /usr/local/bin/wkhtmltopdf;
 
 ENV APP_PATH /usr/src/app
-ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
 ENV LIB_GIT2_COMPILE_PATH /opt
 
 RUN curl https://deb.nodesource.com/setup_10.x | bash
@@ -70,6 +71,5 @@ COPY saudesimples/Gemfile.lock /saudesimples/Gemfile.lock
 RUN bundle install
 
 EXPOSE 4000
+EXPOSE 4040
 EXPOSE 8080
-
-CMD ["rails", "server", "-p", "4000"]
