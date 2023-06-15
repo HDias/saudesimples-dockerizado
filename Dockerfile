@@ -70,6 +70,7 @@ COPY saudesimples/Gemfile.lock /saudesimples/Gemfile.lock
 
 RUN bundle install
 
+EXPOSE 5000
 EXPOSE 4000
 EXPOSE 4040
 EXPOSE 8080

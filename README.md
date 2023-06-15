@@ -149,7 +149,7 @@ ActiveRecord::Migration.add_index :audits, :request_uuid
 Para que os testes rodem, é necessário ter um banco de testes previamente populado, para isso rode os seguintes
 comandos:
 
-- Run ` docker exec -it <ID_CONTAINER> bash`. Dentro do container siga os passos a seguir
+- Run `docker exec -it <ID_CONTAINER> bash`. Dentro do container siga os passos a seguir
 - Run `rake db:create db:migrate db:seed RAILS_ENV=test`
 - Run rspec `bin/rspec`
 

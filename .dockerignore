@@ -8,7 +8,8 @@ saudesimples/!/log/.keep
 saudesimples/!/tmp/.keep
 
 #
-saudesimples//storage/*
+saudesimples/coverage/*
+saudesimples/storage/*
 saudesimples/!/storage/.keep
 
 saudesimples/tmp/*
